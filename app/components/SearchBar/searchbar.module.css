@@ -1,0 +1,45 @@
+.searchbar__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: black;
+}
+
+.searchbar__container {
+    position: relative;
+    display: inline-block;
+}
+
+.searchbar__icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+.searchbar__input {
+    padding: 5px 130px 5px 50px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    outline: none;
+
+}
+
+.search__button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    border-radius: 100px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    padding: 2px 24px;
+}

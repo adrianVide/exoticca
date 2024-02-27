@@ -1,54 +1,43 @@
 'use client'
 import { useState } from 'react';
+import { filterDestinations } from './helpers/filterDestinations';
 import SectionTag from './components/SectionTag/SectionTag';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const HomeClient = ({ data }: any) => {
     const [destinations, setDestinations] = useState(data.destinations);
     const [searchTerm, setSearchTerm] = useState('');
 
-    const containsTerm = (obj: any, term: string | number): boolean => {
-        for (const key in obj) {
-            if (typeof obj[key] === 'object' && obj[key] !== null) {
-                if (containsTerm(obj[key], term)) {
-                    return true;
-                }
-            } else if (typeof term === 'string' && typeof obj[key] === 'string' && obj[key].toLowerCase().includes(term.toLowerCase())) {
-                return true;
-            } else if (typeof term === 'number' && typeof obj[key] === 'number' && obj[key] === term) {
-                return true;
-            }
-        }
-        return false;
-    };
 
-    const filterDestinations = (term: string) => {
-        const parsedTerm = isNaN(Number(term)) ? term : Number(term);
 
-        const allDestinations = destinations.featuredMonoMarket
-            .concat(destinations.featuredMultiMarket)
-            .concat(destinations.monoMarket)
-            .concat(destinations.multiMarket);
+    const noFilter = <>
+        {destinations.featuredMonoMarket.map((destination: any) => destination.title)}
+        {destinations.featuredMultiMarket.map((destination: any) => destination.title)}
+        {destinations.monoMarket.map((destination: any) => destination.title)}
+        {destinations.multiMarket.map((destination: any) => destination.title)}
+    </>
 
-        return allDestinations.filter((destination: any) => {
-            return containsTerm(destination, parsedTerm);
-        });
-    };
-
-    console.log(destinations);
-    console.log(data);
-
+    const mag =
+        <div className="sc-bBABsx iSAuFU">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="1em" height="1em" data-testid="search-icon">
+                <title>search-icon</title>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.05} d="M11 19.004a8 8 0 1 0 0-16 8 8 0 0 0 0 16M21 21.002l-4.35-4.35"></path>
+            </svg>
+        </div>
     return (
         <>
-            <input
-                type="text"
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-            />
-            {filterDestinations(searchTerm).map((destination: any) => (
-                <div key={destination.id}>{destination.title}</div>
-            ))}
+
+            <SearchBar searchTerm={searchTerm} handleChange={setSearchTerm} />
+
+            {searchTerm.length > 0
+                ?
+                filterDestinations(searchTerm, destinations).map((destination: any) => (
+                    <div key={destination.id}>{destination.title}</div>
+                ))
+                :
+                noFilter}
         </>
+
     );
 }
 
