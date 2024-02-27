@@ -1,0 +1,17 @@
+.sectiontag {
+    font-family: "Red Hat Text", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: inherit;
+    text-align: inherit;
+    margin: 0px;
+    color: currentcolor;
+    text-decoration: inherit;
+    text-transform: inherit;
+    white-space: normal;
+    letter-spacing: 0rem;
+    line-height: 1.25;
+    cursor: inherit;
+    margin: 64px 0px 32px;
+    text-align: center;
+}
