@@ -1,0 +1,177 @@
+.card__container {
+  display: flex;
+  border: 1.5px solid rgb(229, 229, 229);
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  flex-direction: column;
+  margin: 16px;
+  background-color: white;
+
+  @media (min-width: 768px) {
+    max-height: 335px;
+    flex-direction: row;
+  }
+}
+
+.card__image {
+  object-fit: contain;
+  flex: 1;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column-reverse;
+  flex: 1;
+  padding: 8px 8px 8px 16px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.card__left {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card__destination_days {
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.card__title {
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.card__features_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.card__features_highlights {
+  font-family: "Oakes Grotesk", sans-serif;
+  font-size: 14px;
+  text-align: left;
+  text-size-adjust: 100%;
+  padding-right: 16px;
+}
+
+.card__features_highlights div {
+
+  margin-bottom: 4px;
+
+}
+
+.card__features_tags {
+  font-family: "Oakes Grotesk", sans-serif;
+  font-size: 14px;
+  text-align: left;
+  text-size-adjust: 100%;
+}
+
+.card__right {
+  flex: 1;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media (min-width: 768px) {
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.card__prices {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 8px;
+  @media (min-width: 768px) {
+    align-items: flex-end;
+  }
+}
+
+.card__prices_percentage {
+  display: inline-block;
+  background-color: rgb(18, 18, 18);
+  color: rgb(255, 255, 255);
+  padding: 8px 6px;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  border-radius: 100px;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.card__prices_oldNight {
+  color: rgb(113, 113, 113);
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+
+}
+
+.card__prices_new {
+  margin-bottom: 8px;
+
+}
+
+.card__prices_oldNumber {
+  text-decoration: line-through;
+}
+
+.card__button {
+  color: rgb(255, 255, 255);
+  width: auto;
+  border-radius: 100px;
+  padding: 16px 18px;
+  background-color: rgb(18, 18, 18);
+  border: none;
+  width: fit-content;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
+
+.card__features_tag {
+  display: inline-block;
+  background-color: rgb(229, 229, 229);
+  color: black;
+  padding: 1px 5px;
+  font-size: .7rem;
+  line-height: 1.25rem;
+  border-radius: 100px;
+  width: fit-content;
+  margin: 3px;
+}
+
+.card__features_outlined {
+  display: inline-block;
+  background-color: white;
+
+  border: 1px solid rgb(229, 229, 229);
+  color: black;
+  padding: 1px 5px;
+  font-size: .7rem;
+  line-height: 1.25rem;
+  border-radius: 100px;
+  width: fit-content;
+  margin: 3px;
+}
