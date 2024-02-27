@@ -6,6 +6,11 @@ export default async function Home() {
   if (!response.ok) {
     throw new Error('Fetch Error');
   }
-  const data = await response.json();
+  const rawData = await response.json();
+  const data = {
+    country: rawData.name,
+    destinations: rawData.destinations,
+  }
+
   return <HomeClient data={data} />;
 }
