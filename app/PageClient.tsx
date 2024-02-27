@@ -3,39 +3,35 @@ import { useState } from 'react';
 import { filterDestinations } from './helpers/filterDestinations';
 import SectionTag from './components/SectionTag/SectionTag';
 import SearchBar from './components/SearchBar/SearchBar';
+import Card from './components/Card/Card';
+import styles from './pageclient.module.css'
 
 const HomeClient = ({ data }: any) => {
     const [destinations, setDestinations] = useState(data.destinations);
     const [searchTerm, setSearchTerm] = useState('');
 
-
-
     const noFilter = <>
-        {destinations.featuredMonoMarket.map((destination: any) => destination.title)}
-        {destinations.featuredMultiMarket.map((destination: any) => destination.title)}
-        {destinations.monoMarket.map((destination: any) => destination.title)}
-        {destinations.multiMarket.map((destination: any) => destination.title)}
+        {destinations.featuredMonoMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={false} isRecommended={!!destinations.featuredMonoMarket[0].headLine} />}
+        {destinations.featuredMonoMarket.map((destination: any) => <Card card={destination} />)}
+        {destinations.featuredMultiMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={true} isRecommended={!!destinations.featuredMultiMarket[0].headLine} />}
+        {destinations.featuredMultiMarket.map((destination: any) => <Card card={destination} />)}
+        {destinations.monoMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={false} isRecommended={!!destinations.monoMarket[0].headLine} />}
+        {destinations.monoMarket.map((destination: any) => <Card card={destination} />)}
+        {destinations.multiMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={true} isRecommended={!!destinations.multiMarket[0].headLine} />}
+        {destinations.multiMarket.map((destination: any) => <Card card={destination} />)}
     </>
 
-    const mag =
-        <div className="sc-bBABsx iSAuFU">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="1em" height="1em" data-testid="search-icon">
-                <title>search-icon</title>
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.05} d="M11 19.004a8 8 0 1 0 0-16 8 8 0 0 0 0 16M21 21.002l-4.35-4.35"></path>
-            </svg>
-        </div>
     return (
         <>
 
-            <SearchBar searchTerm={searchTerm} handleChange={setSearchTerm} />
+            <SearchBar searchTerm={searchTerm} handleChange={setSearchTerm} canHide={searchTerm === ''}/>
+            <div className={styles.wrapper}>
+                {searchTerm.length > 0
+                    ?
+                    filterDestinations(searchTerm, destinations).map((destination: any) => <Card card={destination} />)
+                    :
+                    noFilter}</div>
 
-            {searchTerm.length > 0
-                ?
-                filterDestinations(searchTerm, destinations).map((destination: any) => (
-                    <div key={destination.id}>{destination.title}</div>
-                ))
-                :
-                noFilter}
         </>
 
     );
