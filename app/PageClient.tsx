@@ -23,24 +23,30 @@ const HomeClient = ({ data }: HomeClientProps) => {
     const [destinations, setDestinations] = useState(data.destinations);
     const [searchTerm, setSearchTerm] = useState('');
     const noFilter = <>
-        {destinations.featuredMonoMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={false} isRecommended={!!destinations.featuredMonoMarket[0].headLine} />}
-        {destinations.featuredMonoMarket.map((destination: destination) => <Card card={destination} />)}
-        {destinations.featuredMultiMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={true} isRecommended={!!destinations.featuredMultiMarket[0].headLine} />}
-        {destinations.featuredMultiMarket.map((destination: destination) => <Card card={destination} />)}
-        {destinations.monoMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={false} isRecommended={!!destinations.monoMarket[0].headLine} />}
-        {destinations.monoMarket.map((destination: destination) => <Card card={destination} />)}
-        {destinations.multiMarket.length > 0 && <SectionTag country={data.country} isMultiCountry={true} isRecommended={!!destinations.multiMarket[0].headLine} />}
-        {destinations.multiMarket.map((destination: destination) => <Card card={destination} />)}
+        {Object.entries(destinations).map(([type, destinationsList]) => (
+            destinationsList.length > 0 && (
+                <>
+                    <SectionTag
+                        country={data.country}
+                        isMultiCountry={type.includes('ulti')}
+                        isRecommended={destinationsList[0].headLine === "recommended"}
+                    />
+                    {destinationsList.map((destination) => (
+                        <Card key={destination.id} card={destination} />
+                    ))}
+                </>
+            )
+        ))}
     </>
 
     return (
         <>
 
-            <SearchBar searchTerm={searchTerm} handleChange={setSearchTerm} canHideSearch={searchTerm === ''}/>
+            <SearchBar searchTerm={searchTerm} handleSearch={setSearchTerm} isSearching={searchTerm === ''} />
             <div className={styles.wrapper}>
                 {searchTerm.length > 0
                     ?
-                    filterDestinations(searchTerm, destinations).map((destination: destination) => <Card card={destination} />)
+                    filterDestinations(searchTerm, destinations).map((destination: destination) => <Card key={destination.id} card={destination} />)
                     :
                     noFilter}</div>
 
