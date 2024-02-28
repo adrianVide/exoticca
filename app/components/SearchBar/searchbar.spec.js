@@ -6,7 +6,7 @@ describe('SearchBar Component', () => {
     const handleChange = jest.fn();
 
     test('hides logo when scrolled down and canHide is true', () => {
-        const { queryByAltText } = render(<SearchBar handleChange={handleChange} />);
+        const { queryByAltText } = render(<SearchBar handleChange={handleChange} isSearching />);
         expect(queryByAltText('logo')).toBeInTheDocument();
 
         window.scrollY = 100;
@@ -15,7 +15,7 @@ describe('SearchBar Component', () => {
     });
 
     test('does not hide searchbar when scrolled down and canHide is false', async () => {
-        const { queryByAltText } = render(<SearchBar handleChange={handleChange} searchTerm='' canHideSearch={false} />);
+        const { queryByAltText } = render(<SearchBar handleChange={handleChange} searchTerm='' isSearching={false} />);
         expect(queryByAltText('logo')).not.toBeInTheDocument();
 
         window.scrollY = 100;
