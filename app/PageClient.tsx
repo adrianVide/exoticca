@@ -25,7 +25,7 @@ const HomeClient = ({ data }: HomeClientProps) => {
     const noFilter = <>
         {Object.entries(destinations).map(([type, destinationsList]) => (
             destinationsList.length > 0 && (
-                <>
+                <div key={`${type}-${destinationsList[0].id}`}>
                     <SectionTag
                         country={data.country}
                         isMultiCountry={type.includes('ulti')}
@@ -34,14 +34,13 @@ const HomeClient = ({ data }: HomeClientProps) => {
                     {destinationsList.map((destination) => (
                         <Card key={destination.id} card={destination} />
                     ))}
-                </>
+                </div>
             )
         ))}
     </>
 
     return (
         <>
-
             <SearchBar searchTerm={searchTerm} handleSearch={setSearchTerm} isSearching={searchTerm === ''} />
             <div className={styles.wrapper}>
                 {searchTerm.length > 0
@@ -49,7 +48,6 @@ const HomeClient = ({ data }: HomeClientProps) => {
                     filterDestinations(searchTerm, destinations).map((destination: destination) => <Card key={destination.id} card={destination} />)
                     :
                     noFilter}</div>
-
         </>
 
     );

@@ -20,9 +20,8 @@ type CardProps = {
 const Card = ({ card }: CardProps) => {
     if (!card) return null;
     const { id, title, destination, days, images, highlights, includes, tags, priceDetail } = card;
-
     const getHighlights = () => {
-        const highlight = (title: string) => <div key={title}><Image alt='pin' width={15} height={15} src='/map.svg'></Image> {title}</div>;
+        const highlight = (title: string) => <div key={`${title}${card.id}`}><Image alt='pin' width={15} height={15} src='/map.svg'></Image> {title}</div>;
         const remainingHighlights = highlights.length > 4 ? highlights.length - 4 : 0;
 
         if (highlights.length > 4) {
@@ -40,7 +39,7 @@ const Card = ({ card }: CardProps) => {
             const lowercaseTitle = title.toLowerCase();
             const formattedTitle = lowercaseTitle.charAt(0).toUpperCase() + lowercaseTitle.slice(1);
             const replacedTitle = formattedTitle.replace(/_/g, ' ');
-            return <div key={title}><Image alt={title} width={15} height={15} src={`/${title}.svg`}></Image> {replacedTitle}</div>;
+            return <div key={`${title}${card.id}`}><Image alt={title} width={15} height={15} src={`/${title}.svg`}></Image> {replacedTitle}</div>;
         };
         return includes.map(include);
     }
@@ -52,7 +51,7 @@ const Card = ({ card }: CardProps) => {
             if (tag.name === "PROMOTED") {
                 return null;
             } else {
-                return <span key={tag.alias} className={styles.card__features_tag}>{tag.name}</span>;
+                return <span key={`${tag.name}${card.id}`} className={styles.card__features_tag}>{tag.name}</span>;
             }
         });
 
