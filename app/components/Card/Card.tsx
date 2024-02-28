@@ -1,26 +1,9 @@
 
 import Image from 'next/image';
 import styles from './card.module.css';
+import { image, highlight, tag, priceDetail } from '../../types/types';
 
-type image = {
-    desktop: string;
-    mobile: string;
-    tablet: string;
-}
-type highlight = {
-    title: string;
-}
-type tag = {
-    alias: string;
-    name: string;
-}
-type priceDetail = {
-    fromPriceBeautify: string;
-    oldPriceBeautify: string;
-    pricingPercentage: number;
-    pricePerNight: string;
-}
-interface CardProps {
+type CardProps = {
     card: {
         id: string;
         title: string;
@@ -35,6 +18,7 @@ interface CardProps {
 }
 
 const Card = ({ card }: CardProps) => {
+    if (!card) return null;
     const { id, title, destination, days, images, highlights, includes, tags, priceDetail } = card;
 
     const getHighlights = () => {
@@ -71,13 +55,13 @@ const Card = ({ card }: CardProps) => {
                 return <span key={tag.alias} className={styles.card__features_tag}>{tag.name}</span>;
             }
         });
-    
+
         const soloTravelerSpan = soloTravelerTag ? (
             <span key={soloTravelerTag.alias} className={`${styles.card__features_tag} ${styles.card__features_outlined}`}>
-               <Image alt='solo traveller' width={15} height={15} src='/SOLO_TRAVELLER.svg'></Image> {soloTravelerTag.name.toLocaleUpperCase()}
+                <Image alt='solo traveller' width={15} height={15} src='/SOLO_TRAVELLER.svg'></Image> {soloTravelerTag.name.toLocaleUpperCase()}
             </span>
         ) : null;
-    
+
         return (
             <>
                 <span className={`${styles.card__features_tag} ${styles.card__features_outlined}`}>GROUP TOURS</span>
@@ -101,7 +85,7 @@ const Card = ({ card }: CardProps) => {
                 </div>
 
                 <div className={styles.card__right}>
-                        <div className={styles.card__prices_percentage}>- {priceDetail.pricingPercentage} %</div>
+                    <div className={styles.card__prices_percentage}>- {priceDetail.pricingPercentage} %</div>
                     <div className={styles.card__prices}>
                         <div className={styles.card__prices_oldNight}>From <span className={styles.card__prices_oldNumber}>{priceDetail.oldPriceBeautify}</span></div>
                         <div className={styles.card__prices_new}>{priceDetail.fromPriceBeautify}</div>
